@@ -23,8 +23,9 @@
                 </form>
 
                 
-                  {% if result %}
+                  {% if result ,msg %}
                   <h3 class="mt-2"> Your BMI is : {{ result }} </h3>
+                  <h4>{{ msg }}</h4>
                   {% endif %}
 
                 

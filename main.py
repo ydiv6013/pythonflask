@@ -85,7 +85,18 @@ def bmicalc() :
         weight = int(request.form['weight'])
         height = float(request.form['height']) / 100
         bmi = round(weight / height ** 2)
-        return render_template('bmicalc.html', result = bmi ) 
+        msg = ''
+        if bmi > 35 :
+            msg =f"Your BMI is {bmi} , you are clinically obese"
+        elif bmi >30 :
+             msg =f"Your BMI is {bmi} , you are obese"
+        elif bmi > 25 :
+            msg =f"Your BMI is {bmi} , you are overweight"
+        elif bmi > 18 :
+            msg =f"Your BMI is {bmi} , you are normal weight"
+        else :
+             msg =f"Your BMI is {bmi} , you are underweight"
+        return render_template('bmicalc.html', result = bmi , msg = msg) 
     
     return render_template('bmicalc.html')
 
