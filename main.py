@@ -63,12 +63,24 @@ class Contact(db.Model):
     message = db.Column(db.String(150), unique=False, nullable=False)
     #date = db.Column(db.String(50), unique=False, nullable=False)
 
-
+# subscribe table
 class Subscribe(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     sub_name = db.Column(db.String(50), unique=False, nullable=False)
     sub_email = db.Column(db.String(50), unique=False, nullable=False)
+
+
+class Blog(db.Model) :
+
+     # id,name,email,mobile,message,date
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50), unique=False, nullable=False)
+    description = db.Column(db.String(150), unique=False, nullable=False)
+    postedby = db.Column(db.String(15), unique=False, nullable=False)
+    slug = db.Column(db.String(50), unique=False, nullable=False)
+    date = db.Column(db.String(50), unique=False, nullable=True)
+
 
 @app.route('/') 
 
@@ -104,11 +116,32 @@ def bmicalc() :
 def cv() :
     return render_template('cv.html')
 
-@app.route('/blog')
 
-def blog() :
-    return render_template('blog.html')
+# Blog 
+@app.route('/blog/<string:slug>' , methods= ['GET'])
 
+def blog(slug) :
+
+    post = Blog.query.filter_by(slug = slug).first()
+    return render_template('blog.html' , post = post)
+
+@app.route('/addblog' , methods = ['GET','POST']) # type: ignore
+
+def addblog() :
+
+    if request.method == 'POST' :
+        title = request.form['title']
+        description = request.form['description']
+        postedby = request.form['createdby']
+        date =datetime.now()
+        slug = title
+
+        entry = Blog(title = title, description = description , postedby = postedby , slug = slug , date = date) 
+        db.session.add(entry)
+        db.session.commit()
+        return render_template('addblog.html', success= "post added successfully !")
+    
+    return render_template ('addblog.html')
 
 @app.route('/contactus' , methods = ['GET','POST'])
 

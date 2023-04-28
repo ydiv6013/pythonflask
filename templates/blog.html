@@ -9,24 +9,16 @@
     <div class="row">
       <div class="col-md-8">
         <h1 class="mb-4">Latest Blog Posts</h1>
+        <!--blog post start here--> 
+        
         <div class="card mb-4">
           <div class="card-body">
-            <h2 class="card-title">How to Improve Your Writing Skills</h2>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo tincidunt ante vel aliquam. Suspendisse fringilla placerat mauris, a cursus mauris volutpat ac.</p>
+            <h2 class="card-title">{{post.title}}</h2>
+            <p class="card-text">{{post.description}}</p>
             <a href="#" class="btn btn-primary">Read More &rarr;</a>
           </div>
           <div class="card-footer text-muted">
-            Posted on January 1, 2023 by John Doe
-          </div>
-        </div>
-        <div class="card mb-4">
-          <div class="card-body">
-            <h2 class="card-title">10 Tips for Working Remotely</h2>
-            <p class="card-text">Sed sed lobortis risus, quis sodales leo. Morbi eleifend, dolor eu commodo interdum, nulla ipsum aliquet est, in euismod ex augue at nulla.</p>
-            <a href="#" class="btn btn-primary">Read More &rarr;</a>
-          </div>
-          <div class="card-footer text-muted">
-            Posted on December 15, 2022 by Jane Smith
+           Posted on {{post.date}},by {{post.postedby}}
           </div>
         </div>
         <!-- Additional blog posts would be listed here -->
